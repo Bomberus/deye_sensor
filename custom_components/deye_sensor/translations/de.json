@@ -1,0 +1,25 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Input Status Page",
+                "description": "If you need help with the configuration have a look here: https://github.com/Bomberus/deye_sensor",
+                "data": {
+                    "username": "Username",
+                    "password": "Password",
+                    "url": "URL"
+                },
+                "data_description": {
+                    "username": "Username",
+                    "password": "Password",
+                    "url": "Hostname for Deye Inverter (including protocol, e.g. http://192.168.178.70)"
+                }
+            }
+        },
+        "error": {
+            "auth": "Username/Password is wrong.",
+            "connection": "Unable to connect to the server.",
+            "unknown": "Unknown error occurred."
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "domain": "deye_sensor",
+  "name": "Deye Sensor",
+  "codeowners": [
+    "@Bomberus"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/Bomberus/deye_sensor",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Bomberus/deye_sensor/issues",
+  "version": "0.0.0"
+}

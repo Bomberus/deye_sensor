@@ -1,23 +1,23 @@
-"""Adds config flow for Blueprint."""
+"""Adds config flow for ."""
 from __future__ import annotations
 
 import voluptuous as vol
 from homeassistant import config_entries
-from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
+from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, CONF_URL
 from homeassistant.helpers import selector
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
 from .api import (
-    IntegrationBlueprintApiClient,
-    IntegrationBlueprintApiClientAuthenticationError,
-    IntegrationBlueprintApiClientCommunicationError,
-    IntegrationBlueprintApiClientError,
+    DeyeIntegrationApiClient,
+    DeyeIntegrationApiClientAuthenticationError,
+    DeyeIntegrationApiClientCommunicationError,
+    DeyeIntegrationApiClientError,
 )
 from .const import DOMAIN, LOGGER
 
 
-class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
-    """Config flow for Blueprint."""
+class FlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
+    """Config flow for ."""
 
     VERSION = 1
 
@@ -32,14 +32,15 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 await self._test_credentials(
                     username=user_input[CONF_USERNAME],
                     password=user_input[CONF_PASSWORD],
+                    url=user_input[CONF_URL],
                 )
-            except IntegrationBlueprintApiClientAuthenticationError as exception:
+            except DeyeIntegrationApiClientAuthenticationError as exception:
                 LOGGER.warning(exception)
                 _errors["base"] = "auth"
-            except IntegrationBlueprintApiClientCommunicationError as exception:
+            except DeyeIntegrationApiClientCommunicationError as exception:
                 LOGGER.error(exception)
                 _errors["base"] = "connection"
-            except IntegrationBlueprintApiClientError as exception:
+            except DeyeIntegrationApiClientError as exception:
                 LOGGER.exception(exception)
                 _errors["base"] = "unknown"
             else:
@@ -65,16 +66,22 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                             type=selector.TextSelectorType.PASSWORD
                         ),
                     ),
+                    vol.Required(CONF_URL): selector.TextSelector(
+                        selector.TextSelectorConfig(
+                            type=selector.TextSelectorType.TEXT
+                        ),
+                    ),
                 }
             ),
             errors=_errors,
         )
 
-    async def _test_credentials(self, username: str, password: str) -> None:
+    async def _test_credentials(self, username: str, password: str, url: str) -> None:
         """Validate credentials."""
-        client = IntegrationBlueprintApiClient(
+        client = DeyeIntegrationApiClient(
             username=username,
             password=password,
+            url=url,
             session=async_create_clientsession(self.hass),
         )
         await client.async_get_data()
