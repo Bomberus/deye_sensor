@@ -37,7 +37,7 @@ class DeyeIntegrationApiClient:
         self._username = username
         self._password = password
         self._url = url
-        self._session = self._session = session
+        self._session = session
 
     async def async_get_data(self) -> any:
         """Get data from the API."""
