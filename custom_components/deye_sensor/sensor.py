@@ -22,18 +22,21 @@ ENTITY_DESCRIPTIONS = (
         device_class=DEVICE_CLASS_ENERGY,
         name="Operation Power",
         icon="mdi:power-plug",
+        native_unit_of_measurement="W",
     ),
     SensorEntityDescription(
         key=GENERATED_TODAY,
         device_class=DEVICE_CLASS_POWER,
         name="Operation Production (Today)",
         icon="mdi:solar-power",
+        native_unit_of_measurement="kWh"
     ),
     SensorEntityDescription(
         key=GENERATED_TOTAL,
         device_class=DEVICE_CLASS_POWER,
         name="Operation Production (Total)",
         icon="mdi:solar-power",
+        native_unit_of_measurement="kWh"
     ),
 )
 
