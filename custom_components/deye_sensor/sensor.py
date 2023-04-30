@@ -4,8 +4,7 @@ from __future__ import annotations
 from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
 from homeassistant.const import (
     DEVICE_CLASS_POWER,
-    DEVICE_CLASS_ENERGY,
-    UnitOfPower
+    DEVICE_CLASS_ENERGY
 )
 
 from .const import DOMAIN, GENERATED_TODAY, ALARMS, CURRENT_POWER, GENERATED_TOTAL
