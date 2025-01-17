@@ -2,10 +2,7 @@
 from __future__ import annotations
 
 from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
-from homeassistant.const import (
-    DEVICE_CLASS_POWER,
-    DEVICE_CLASS_ENERGY
-)
+from homeassistant.components.sensor.const import SensorDeviceClass
 
 from .const import DOMAIN, GENERATED_TODAY, ALARMS, CURRENT_POWER, GENERATED_TOTAL
 from .coordinator import DeyeDataUpdateCoordinator
@@ -19,7 +16,7 @@ ENTITY_DESCRIPTIONS = (
     ),
     SensorEntityDescription(
         key=CURRENT_POWER,
-        device_class=DEVICE_CLASS_ENERGY,
+        device_class=SensorDeviceClass.ENERGY,
         name="Operation Power",
         icon="mdi:power-plug",
         state_class="measurement",
@@ -27,7 +24,7 @@ ENTITY_DESCRIPTIONS = (
     ),
     SensorEntityDescription(
         key=GENERATED_TODAY,
-        device_class=DEVICE_CLASS_POWER,
+        device_class=SensorDeviceClass.POWER,
         name="Operation Production (Today)",
         icon="mdi:solar-power",
         state_class="total_increasing",
@@ -35,7 +32,7 @@ ENTITY_DESCRIPTIONS = (
     ),
     SensorEntityDescription(
         key=GENERATED_TOTAL,
-        device_class=DEVICE_CLASS_POWER,
+        device_class=SensorDeviceClass.POWER,
         name="Operation Production (Total)",
         icon="mdi:solar-power",
         state_class="total",
